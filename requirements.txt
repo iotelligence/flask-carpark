@@ -1,4 +1,7 @@
 flask
+Flask-Migrate
+Flask-SQLAlchemy
+psycopg2
 flask-socketio
 eventlet
 gunicorn
