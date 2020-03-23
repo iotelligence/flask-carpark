@@ -21,8 +21,10 @@ $(document).ready(function(){
     socket.on('carpark response', function(msg) {
         if(msg.avail == 'available') {
             $('#tr_'+msg.floor).html('<td>'+msg.floor+'</td>'+'<td bgcolor="#B6E806">'+msg.avail+'</td>'+'<td>'+msg.last_update+'</td>').fadeTo(100, 0.3, function() { $(this).fadeTo(300, 1.0);});
+            $('#trs_'+msg.floor).html('<td>'+msg.floor+'</td>'+'<td bgcolor="#B6E806">'+msg.avail+'</td>'+'<td>'+msg.last_update+'</td>').fadeTo(100, 0.3, function() { $(this).fadeTo(300, 1.0);});
         } else {
             $('#tr_'+msg.floor).html('<td>'+msg.floor+'</td>'+'<td bgcolor="#FA7268">'+msg.avail+'</td>'+'<td>'+msg.last_update+'</td>').fadeTo(100, 0.3, function() { $(this).fadeTo(300, 1.0);});
+            $('#trs_'+msg.floor).html('<td>'+msg.floor+'</td>'+'<td bgcolor="#FA7268">'+msg.avail+'</td>'+'<td>'+msg.last_update+'</td>').fadeTo(100, 0.3, function() { $(this).fadeTo(300, 1.0);});
         }
 
         avail = $('table td:contains(available)').length;
