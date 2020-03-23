@@ -8,7 +8,6 @@ import time
 from flask import request, url_for, render_template, Response
 from flask_socketio import emit
 
-import numpy as np
 import paho.mqtt.subscribe as subscribe
 
 from app import app, db, socketio
