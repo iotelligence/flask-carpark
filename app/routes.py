@@ -65,8 +65,8 @@ def carpark_thread():
         )
 
 
-@app.route("/")
-def index():
+@app.route("/dashboard")
+def dashboard():
     global thread
     if thread is None:
         thread = Thread(target=carpark_thread)

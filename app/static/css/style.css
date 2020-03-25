@@ -13,9 +13,9 @@ body {
 }
 
 div.wrap { 
-    width: 30%;
+    width: 25%;
     display: inline-block;
-    margin: 10px;
+    margin: 5px;
     vertical-align: top
 }
 table {

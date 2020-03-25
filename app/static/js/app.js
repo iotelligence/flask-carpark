@@ -8,8 +8,8 @@ $(document).ready(function(){
     // event handler for server sent data
     // the data is displayed in the "Received" section of the page
     socket.on('my connected', function(msg) {
-        avail = $('table td:contains(available)').length;
-        occupied = $('table td:contains(occupied)').length;
+        avail = $("tr[id*='tr_'] td:contains(available)").length;
+        occupied= $("tr[id*='tr_'] td:contains(occupied)").length;
         $('#log').html(msg.data);
         $('#avail').html('Available: '+ avail + ',' + 'Occupied: ' + occupied);
     });
@@ -27,8 +27,8 @@ $(document).ready(function(){
             $('#trs_'+msg.floor).html('<td>'+msg.floor+'</td>'+'<td bgcolor="#FA7268">'+msg.avail+'</td>'+'<td>'+msg.last_update+'</td>').fadeTo(100, 0.3, function() { $(this).fadeTo(300, 1.0);});
         }
 
-        avail = $('table td:contains(available)').length;
-        occupied = $('table td:contains(occupied)').length;
+        avail = $("tr[id*='tr_'] td:contains(available)").length;
+        occupied= $("tr[id*='tr_'] td:contains(occupied)").length;
         $('#avail').html('Available: '+ avail + ',' + 'Occupied: ' + occupied);
     });
 
