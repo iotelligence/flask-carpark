@@ -79,6 +79,15 @@ Test data/device: the values from sensor.
       
 Expected results: the value from sensor will be changed, when the distance change. 
 Actual results: Sensor return a random value when object is out of range(2m).
+*************************************************************************************************************
+Test case: Mqtt
+Discription: To send message through mqtt. 
+Test procedure:	1. Read data from sensor.
+		2. Publish by mqtt.
+		3. Use MQTTBox to subscibe.
+		4. Check message.
+Test data/device: The values from sensor.
+Expected results: Recieve a correct message(distance) in MQTTBox.
 
 
 **************************************************************************************************************
