@@ -136,3 +136,26 @@ Actual result: -
   Therefore, we know the number of car that parked in here.
 ```
 *************************************************************************************************************
+# CSV File Export
+```
+    Test case ID: Need to be assigned.
+```
+## Objective 
+```
+    Check the function of exporting csv file.
+```
+## Procedure
+```
+   1. system is offline or no data update 
+   2. get the data from https://carpark-monitor.herokuapp.com/export
+   3. parser result to csv and get the last record
+   4. get the database last record
+   5. compare two result to check if they are matched.
+
+```
+## Expected result
+```
+   1. Connect to URL and return status code 200
+   2. The data from csv is matched with the database
+```
+*************************************************************************************************************
