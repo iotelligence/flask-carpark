@@ -32,16 +32,19 @@ class CarparkModelsTestCase(unittest.TestCase):
         self.assertEqual(car.floor_slot, 'F2_3')
         self.assertFalse(car.available)
         self.assertEqual(car.timestamp, now)
-        
+
 class DashboardPageTestCase(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.client = app.test_client()
+        self.client = self.app.test_client()
+        db.create_all()
 
     def tearDown(self):
+        db.session.remove()
+        db.drop_all()
         self.app_context.pop()
 
     def test_dashboard_status_code(self):
