@@ -65,3 +65,52 @@ Then deploy
 ```
 $ git push heroku master
 ```
+
+## Data Analytic Testcase
+
+Test case: Check_Generated_Data-001
+Description: Check whether the generated data is exist or can be download and readable from data source. 
+
+Prerequisites: 
+      1. User Authorization
+      2. Web-page Avaliable 
+
+Test Procedure:
+      1. Enter website 
+      2. Show report data
+
+Test data: Generated Data from database 
+
+Expected results:The report of data should be appeared in web page 
+
+Actual result: -
+
+**************************************************************************************************************
+
+Test case: Test_Format-001
+
+Description:Validation of the data type,data length and schema format associated with this format
+
+---------------------------------------------------------
+           |               |                 |             
+Floor_Slot |	Status       |	YYYY-MM-DD     |	  Time
+-----------|---------------|-----------------|-----------
+F3_22	     |   Occupied	   |  1/12/2020      |	 9:58:00
+F2_10	     |   Available   |	1/13/2020      |	10:58:00
+  
+Prerequisites:
+        1. User Authorization
+        2. Web-page Avaliable
+
+Test Procedure:
+        1.Enter website
+        2.Query data from website
+        3.Validate format and data type whether they are correctly mapped or compatible with the specified format.
+
+Test data: Generated Data from database 
+
+Expected results the data type and format of table should compatible with the format 
+
+Actual result: -
+
+*************************************************************************************************************
