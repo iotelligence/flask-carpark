@@ -1,6 +1,20 @@
 # Flask Carpark
 
-## Carpark monitoring system
+Carpark monitoring system
+
+## Requirements
+```
+Flask
+Flask-Migrate
+Flask-SocketIO
+Flask-SQLAlchemy
+eventlet
+psycopg2
+gunicorn
+python-dotenv
+paho-mqtt
+SQLAlchemy
+```
 
 ## Installation
 
@@ -19,4 +33,9 @@ $ sourve venv
 ## Run
 ```
 (venv) $ gunicorn --worker-class eventlet -w 1 application:app
+```
+
+## Deploy
+```
+$ git push heroku master
 ```
