@@ -4,7 +4,7 @@ import json
 from threading import Thread
 import time
 
-from flask import request, url_for, render_template, Response, current_app
+from flask import request, url_for, render_template, Response, current_app, stream_with_context
 from flask_socketio import emit
 
 import paho.mqtt.subscribe as subscribe
@@ -13,8 +13,6 @@ from app import db, socketio
 from app.main import bp
 from app.models import Carpark
 
-
-#thread = None
 
 class Slot(object):
     def __init__(self, floor_slot):
@@ -116,7 +114,7 @@ def generate_csv():
             data = [floor_slot, available, timestamp]
             yield ",".join(data) + "\n"
 
-    return Response(generate(), mimetype="text/csv")
+    return Response(stream_with_context(generate()), mimetype="text/csv")
 
 
 @socketio.on("connect", namespace="/test")
