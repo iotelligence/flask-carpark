@@ -32,6 +32,24 @@ class CarparkModelsTestCase(unittest.TestCase):
         self.assertEqual(car.floor_slot, 'F2_3')
         self.assertFalse(car.available)
         self.assertEqual(car.timestamp, now)
+        
+class DashboardPageTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.client = app.test_client()
+
+    def tearDown(self):
+        self.app_context.pop()
+
+    def test_dashboard_status_code(self):
+        result = self.client.get('/')
+        self.assertEqual(result.status_code, 200)
+
+        result = self.client.get('/dashboard')
+        self.assertEqual(result.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
