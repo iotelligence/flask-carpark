@@ -9,6 +9,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         "postgresql://postgres:public@localhost:25432/carpark"
+        #'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MQTT_BROKER_URL = os.environ.get('MQTT_BROKER_URL') or 'mqtt.netpie.io'
     MQTT_BROKER_PORT = os.environ.get('MQTT_BROKER_PORT') or 1883
