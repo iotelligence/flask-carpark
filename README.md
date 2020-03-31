@@ -35,6 +35,11 @@ $ sourve venv
 (venv) $ gunicorn --worker-class eventlet -w 1 application:app
 ```
 
+## Running test
+```
+$ python tests.py
+```
+
 ## Deploy
 ```
 $ git push heroku master
