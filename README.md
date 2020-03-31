@@ -87,28 +87,27 @@ Actual result: -
 
 **************************************************************************************************************
 
-Test case: Test_Format-001
+Test case: Test_Format-001 <br/>
 
-Description:Validation of the data type,data length and schema format associated with this format
-
-           |               |                              
+Description:Validation of the data type,data length and schema format associated with this format<br/>
+                
 Floor_Slot |	Status   |	 Date-time    
 -----------|---------------|----------------------------
 F3_22	     |   Occupied	   |  1/12/2020 9:58:00
 F2_10	     |   Available   |	1/13/2020 10:58:00
   
-Prerequisites:
-        1. User Authorization
-        2. Web-page Avaliable
+Prerequisites:<br/>
+        1. User Authorization<br/>
+        2. Web-page Avaliable<br/>
 
-Test Procedure:
-        1.Enter website
-        2.Query data from website
-        3.Validate format and data type whether they are correctly mapped or compatible with the specified format.
+Test Procedure:<br/>
+        1.Enter website<br/>
+        2.Query data from website<br/>
+        3.Validate format and data type whether they are correctly mapped or compatible with the specified format.<br/>
 
-Test data: Generated Data from database 
+Test data: Generated Data from database <br/>
 
-Expected results the data type and format of table should compatible with the format 
+Expected results the data type and format of table should compatible with the format <br/>
 
 Actual result: -
 
