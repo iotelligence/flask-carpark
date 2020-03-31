@@ -114,3 +114,24 @@ Expected results the data type and format of table should compatible with the fo
 Actual result: -
 
 *************************************************************************************************************
+
+
+# Cloud and Server Test Case
+
+## Test Case: 
+      Server Test
+
+## Description: 
+      To have the data from the device for observing pattern on cloud server and export that data as csv file
+
+## Procedure: 
+      (1) To subscribe the MQTT Broker (netpie.io) to know the information of parking slot availability 
+      (2) Export data as csv file for data analysis part.
+ 
+ ## Test Data: 
+      Raw data 3x25 = 75 slots
+      Storage require/1 year 700MB (Raw) & 50 MB (compressed)
+ 
+ ## Expected Results:
+      .csv file of observing pattern (daily/weekly/yearly) for data analytic part
+      
