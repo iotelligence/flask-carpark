@@ -65,7 +65,23 @@ Then deploy
 ```
 $ git push heroku master
 ```
+## Hardware Testcase
 
+Test case: VL53L0X module
+Discription: Verify that VL53L0X module is work properly
+
+Test procedure:	
+      1. activate the sensor.
+	2. change the distance.
+	3. check the value from sensor.
+      
+Test data/device: the values from sensor.
+      
+Expected results: the value from sensor will be changed, when the distance change. 
+Actual results: Sensor return a random value when object is out of range(2m).
+
+
+**************************************************************************************************************
 ## Data Analytic Testcase
 
 Test case: Check_Generated_Data-001
