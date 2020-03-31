@@ -12,6 +12,9 @@ class TestConfig(Config):
 
 
 class CarparkModelsTestCase(unittest.TestCase):
+    """
+    Tests model functionality.
+    """
 
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -33,7 +36,11 @@ class CarparkModelsTestCase(unittest.TestCase):
         self.assertFalse(car.available)
         self.assertEqual(car.timestamp, now)
 
+
 class DashboardPageTestCase(unittest.TestCase):
+    """
+    Tests of dashboard page.
+    """
 
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -50,9 +57,35 @@ class DashboardPageTestCase(unittest.TestCase):
     def test_dashboard_status_code(self):
         result = self.client.get('/')
         self.assertEqual(result.status_code, 200)
-
         result = self.client.get('/dashboard')
         self.assertEqual(result.status_code, 200)
+
+
+class ExportDataTestcase(unittest.TestCase):
+    """
+    Tests of export data.
+    """
+
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.client = self.app.test_client()
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
+
+    def test_export_status_code(self):
+        result = self.client.get('/export')
+        self.assertEqual(result.status_code, 200)
+
+    def test_export_mimetype_csv(self):
+        result = self.client.get('/export')
+        self.assertEqual(result.mimetype, 'text/csv')
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
