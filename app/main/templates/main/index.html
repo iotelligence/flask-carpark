@@ -12,9 +12,9 @@
     <div id="log"></div>
 
     <h2 class="header" id="avail"></h2>
-    <div class="wrap">
+    <div class="all">
         <table>
-            <caption>All Floors</caption>
+            <caption><a href="{{ url_for('main.generate_csv') }}" title="Export data to CSV">All Floors</a></caption>
             <tr>
                 <th>Floor</th>
                 <th>Available</th>
@@ -33,7 +33,7 @@
     {% for k, v in floor_groups.items() %}
     <div class="wrap">
         <table>
-            <caption>Floor: {{ k }}</caption>
+            <caption><a href="{{ url_for('main.generate_csv', floor=k) }}" title="Export data to CSV">Floor: {{ k }}</a></caption>
             <tr>
                 <th>Floor</th>
                 <th>Available</th>

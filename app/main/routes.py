@@ -82,6 +82,8 @@ def dashboard():
     floor_slots = [
         i.floor_slot for i in db.session.query(Carpark.floor_slot).distinct()
     ]
+    floor_slots.sort()
+
     floor_groups = defaultdict(list)
     for floor_slot in floor_slots:
         floor_groups[floor_slot.split("_")[0]].append(Slot(floor_slot))
@@ -97,13 +99,18 @@ def dashboard():
         timestamp = c.timestamp
         devices[floor_slot] = [available, timestamp]
 
-    return render_template("index.html", devices=devices, floor_groups=floor_groups)
+    return render_template("main/index.html", devices=devices, floor_groups=floor_groups)
 
 
 @bp.route("/export")
 def generate_csv():
+    floor = request.args.get('floor') or request.args.get('f') or 'all'
+    floor = floor.upper()
     def generate():
-        results = Carpark.query.all()
+        if floor == 'all':
+            results = Carpark.query.all()
+        else:
+            results = Carpark.query.filter(Carpark.floor_slot.startswith(floor+'_')).all()
         yield ",".join(Carpark.__table__.columns.keys()[1:]) + "\n"
         for row in results:
             floor_slot, available, timestamp = (
@@ -114,7 +121,10 @@ def generate_csv():
             data = [floor_slot, available, timestamp]
             yield ",".join(data) + "\n"
 
-    return Response(stream_with_context(generate()), mimetype="text/csv")
+    response = Response(stream_with_context(generate()), mimetype="text/csv")
+    filename = 'data_{}.csv'.format(floor) or 'data.csv'
+    response.headers['Content-Disposition'] = 'attachment; filename={}'.format(filename)
+    return response
 
 
 @socketio.on("connect", namespace="/test")
