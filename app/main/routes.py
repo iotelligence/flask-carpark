@@ -107,7 +107,7 @@ def generate_csv():
     floor = request.args.get('floor') or request.args.get('f') or 'all'
     floor = floor.upper()
     def generate():
-        if floor == 'all':
+        if floor == 'ALL':
             results = Carpark.query.all()
         else:
             results = Carpark.query.filter(Carpark.floor_slot.startswith(floor+'_')).all()
