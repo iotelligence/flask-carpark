@@ -190,9 +190,8 @@ Actual result: -
 	Dashboard is page for display occupancy map. It shows status of slot that available or occupied.
 
 ## Procedure
-	(1) Dashboard page send request to server 
-	(2) To receive .csv file from server
-	(3) To display data on dashboard page
+	(1) To send request from dashboard page to server for download the data
+	(2) To display data on dashboard page
 
 ## Test data
 	To send request to server ([get])
