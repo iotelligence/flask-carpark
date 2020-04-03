@@ -30,8 +30,10 @@
         </table>
     </div>
 
+    <hr width="85%"/>
+
+    <div class="embed-wrapper">
     {% for k, v in floor_groups.items() %}
-    <div class="wrap">
         <table>
             <caption><a href="{{ url_for('main.generate_csv', floor=k) }}" title="Export data to CSV">Floor: {{ k }}</a></caption>
             <tr>
@@ -47,8 +49,8 @@
         </tr>
         {% endfor %}
         </table>
-    </div>
     {% endfor %}
+    </div>
 
 
 </body>

@@ -15,3 +15,5 @@ class Config(object):
     MQTT_BROKER_PORT = os.environ.get('MQTT_BROKER_PORT') or 1883
     MQTT_CLIENT_ID = os.environ.get('MQTT_CLIENT_ID') or None
     MQTT_TOKEN = os.environ.get('MQTT_TOKEN') or None
+    UPLOAD_FOLDER = os.path.join(basedir, 'app/static/csv')
+    MAX_CONTENT_LENGTH = 2 * 1024 * 1024
