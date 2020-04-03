@@ -178,3 +178,22 @@ Actual result: -
 
  ## Expected Results:
       .csv file of observing pattern (daily/weekly/yearly) for data analytic part
+      
+      
+      
+      
+## Test case:
+    Dashboard page
+
+## Description
+Dashboard page for display occupancy map that available and occupied
+
+## Procedure
+
+(1) Dashboard page sent request to server ([Get]/export)
+(2) receive .csv file from server
+(3) display data on dashboard page
+
+## expected results
+To display occupancy map that available and occupied
+
