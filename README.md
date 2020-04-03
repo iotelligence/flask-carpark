@@ -197,3 +197,22 @@ Dashboard page for display occupancy map that available and occupied
 ## expected results
 To display occupancy map that available and occupied
 
+## Test case:
+   Dashboard page
+
+## Description
+Dashboard is page for display occupancy map. It shows status of slot that available or occupied.
+
+## Procedure
+
+(1) Dashboard page send request to server 
+(2) To receive .csv file from server
+(3) To display data on dashboard page
+
+## Test data
+•	To send request to server ([get])
+
+## Expected results
+To receive .csv file from server
+To display occupancy map that available and occupied
+
