@@ -25,7 +25,7 @@ $ python3 -m virtualenv --python=python3 venv
 $ source venv
 
 # Start here
-(venv) $ git clone https://github.com/phondanai/flask-carpark
+(venv) $ git clone https://github.com/iotelligence/flask-carpark
 (venv) $ cd flask-carpark
 (venv) $ pip install -r requirements.txt
 (venv) $ flask db upgrade
