@@ -22,10 +22,10 @@ SQLAlchemy
 # This step is optional if you're not prefered virtualenv
 $ python3 -m pip install virtualenv # in case you don't have
 $ python3 -m virtualenv --python=python3 venv
-$ sourve venv
+$ source venv
 
 # Start here
-(venv) $ git clone https://github.com/phondanai/flask-carpark
+(venv) $ git clone https://github.com/iotelligence/flask-carpark
 (venv) $ cd flask-carpark
 (venv) $ pip install -r requirements.txt
 (venv) $ flask db upgrade
@@ -178,3 +178,25 @@ Actual result: -
 
  ## Expected Results:
       .csv file of observing pattern (daily/weekly/yearly) for data analytic part
+      
+      
+      
+     
+
+## Test case:
+   	Dashboard page
+
+## Description
+	Dashboard is page for display occupancy map. It shows status of slot that available or occupied.
+
+## Procedure
+	(1) To send request from dashboard page to server for download the data
+	(2) To display data on dashboard page
+
+## Test data
+	To send request to server ([get])
+
+## Expected results
+	To receive .csv file from server
+	To display occupancy map that available and occupied
+
