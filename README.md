@@ -22,7 +22,7 @@ SQLAlchemy
 # This step is optional if you're not prefered virtualenv
 $ python3 -m pip install virtualenv # in case you don't have
 $ python3 -m virtualenv --python=python3 venv
-$ sourve venv
+$ source venv
 
 # Start here
 (venv) $ git clone https://github.com/phondanai/flask-carpark
