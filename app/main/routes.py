@@ -116,18 +116,22 @@ def generate_csv():
     floor = request.args.get('floor') or request.args.get('f') or 'all'
     floor = floor.upper()
     def generate():
+        CSV_COLUMNS = ['Slot', 'Status', 'Date', 'Time']
         if floor == 'ALL':
             results = Carpark.query.all()
         else:
             results = Carpark.query.filter(Carpark.floor_slot.startswith(floor+'_')).all()
-        yield ",".join(Carpark.__table__.columns.keys()[1:]) + "\n"
+        yield ",".join(CSV_COLUMNS) + "\n"
         for row in results:
             floor_slot, available, timestamp = (
                 row.floor_slot,
                 "available" if row.available else "occupied",
-                str(row.timestamp),
+                row.timestamp,
             )
-            data = [floor_slot, available, timestamp]
+
+            date = timestamp.strftime("%Y-%m-%d")
+            time = timestamp.strftime("%H:%M:%S")
+            data = [floor_slot, available, date, time]
             yield ",".join(data) + "\n"
 
     response = Response(stream_with_context(generate()), mimetype="text/csv")
