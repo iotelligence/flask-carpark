@@ -8,7 +8,7 @@ from config import Config
 
 class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
 
 
 class CarparkModelsTestCase(unittest.TestCase):
@@ -29,12 +29,20 @@ class CarparkModelsTestCase(unittest.TestCase):
 
     def test_create_data_record(self):
         now = datetime.utcnow()
-        car = Carpark(floor_slot='F2_3', available=False, timestamp=now)
+        car = Carpark(floor_slot="F2_3", available=False, timestamp=now)
         db.session.add(car)
         db.session.commit()
-        self.assertEqual(car.floor_slot, 'F2_3')
+
+        # Model
+        self.assertEqual(car.floor_slot, "F2_3")
         self.assertFalse(car.available)
         self.assertEqual(car.timestamp, now)
+
+        # Actual data in database
+        row = Carpark.query.order_by(Carpark.timestamp.desc()).first()
+        self.assertEqual(row.floor_slot , car.floor_slot)
+        self.assertFalse(row.available, car.available)
+        self.assertEqual(row.timestamp, car.timestamp)
 
 
 class DashboardPageTestCase(unittest.TestCase):
@@ -55,9 +63,9 @@ class DashboardPageTestCase(unittest.TestCase):
         self.app_context.pop()
 
     def test_dashboard_status_code(self):
-        result = self.client.get('/')
+        result = self.client.get("/")
         self.assertEqual(result.status_code, 200)
-        result = self.client.get('/dashboard')
+        result = self.client.get("/dashboard")
         self.assertEqual(result.status_code, 200)
 
 
@@ -73,18 +81,34 @@ class ExportDataTestcase(unittest.TestCase):
         self.client = self.app.test_client()
         db.create_all()
 
+        now = datetime.utcnow()
+        car = Carpark(floor_slot="F2_3", available=False, timestamp=now)
+        db.session.add(car)
+        db.session.commit()
+
+        floor_slot = car.floor_slot
+        available = "available" if car.available == True else "occupied"
+        timestamp = car.timestamp
+        self.expect = """floor_slot,available,timestamp\n{},{},{}\n""".format(
+            floor_slot, available, timestamp
+        ).encode("utf-8")
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
 
     def test_export_status_code(self):
-        result = self.client.get('/export')
+        result = self.client.get("/export")
         self.assertEqual(result.status_code, 200)
 
     def test_export_mimetype_csv(self):
-        result = self.client.get('/export')
-        self.assertEqual(result.mimetype, 'text/csv')
+        result = self.client.get("/export")
+        self.assertEqual(result.mimetype, "text/csv")
+
+    def test_export_csv_data(self):
+        result = self.client.get("/export")
+        self.assertEqual(result.data, self.expect)
 
 
 class InsightTestcase(unittest.TestCase):
@@ -105,10 +129,9 @@ class InsightTestcase(unittest.TestCase):
         self.app_context.pop()
 
     def test_insights_status_code(self):
-        result = self.client.get('/insights')
+        result = self.client.get("/insights")
         self.assertEqual(result.status_code, 200)
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main(verbosity=2)
