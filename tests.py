@@ -88,9 +88,10 @@ class ExportDataTestcase(unittest.TestCase):
 
         floor_slot = car.floor_slot
         available = "available" if car.available == True else "occupied"
-        timestamp = car.timestamp
-        self.expect = """floor_slot,available,timestamp\n{},{},{}\n""".format(
-            floor_slot, available, timestamp
+        date = car.timestamp.strftime("%Y-%m-%d")
+        time = car.timestamp.strftime("%H:%M:%S")
+        self.expect = """Slot,Status,Date,Time\n{},{},{},{}\n""".format(
+            floor_slot, available, date, time
         ).encode("utf-8")
 
     def tearDown(self):
