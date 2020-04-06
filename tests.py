@@ -1,5 +1,7 @@
 from datetime import datetime
 import unittest
+import csv
+import sqlite3
 
 from app import create_app, db
 from app.models import Carpark
@@ -110,7 +112,13 @@ class ExportDataTestcase(unittest.TestCase):
     def test_export_csv_data(self):
         result = self.client.get("/export")
         self.assertEqual(result.data, self.expect)
-
+        
+    def test_check_csv_data(self) :
+        result = self.client.get("/export")
+        rows = csv.reader(Result)
+        for row in rows:
+            print(row)
+        print(self.expect)        
 
 class InsightTestcase(unittest.TestCase):
     """
