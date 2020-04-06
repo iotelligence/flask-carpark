@@ -52,3 +52,46 @@ tr:hover {background-color: #A0D4DB;}
     display: flex;
     justify-content: space-evenly;
 }
+
+div.nav{
+    margin: 0 20% 0 20%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #A0D4DB;
+}
+
+.button {
+    background-color: #A0D4DB; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.center {
+    text-align: center;
+}

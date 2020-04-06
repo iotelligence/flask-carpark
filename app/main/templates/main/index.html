@@ -8,11 +8,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+
+    {% include 'includes/navbar.html' %}
+
     <div id="indicate"></div>
     <div id="log"></div>
 
     <h2 class="header" id="avail"></h2>
-    <div class="all">
+    <div class="center">
+        <a class="button" href="#" onclick="hide()">[Hide/Show] All Floors</a>
+    </div>
+    <div id="all_floor" class="all">
         <table>
             <caption><a href="{{ url_for('main.generate_csv') }}" title="Export data to CSV">All Floors</a></caption>
             <tr>
