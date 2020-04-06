@@ -10,7 +10,17 @@ from bokeh.layouts import row
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
 
-from flask import redirect, request, url_for, render_template, Response, current_app, stream_with_context, flash
+from flask import (
+    redirect,
+    request,
+    url_for,
+    render_template,
+    Response,
+    current_app,
+    stream_with_context,
+    flash
+)
+
 from flask_socketio import emit
 
 import paho.mqtt.subscribe as subscribe
@@ -82,16 +92,13 @@ def carpark_threadpool():
 @bp.route("/")
 @bp.route("/dashboard")
 def dashboard():
-    #global thread
-    #if thread is None:
-    #    thread = Thread(target=carpark_thread)
-    #    thread.daemon = True
-    #    thread.start()
-
     floor_slots = [
         i.floor_slot for i in db.session.query(Carpark.floor_slot).distinct()
     ]
-    floor_slots.sort()
+    floor_slots = sorted(
+        sorted(floor_slots),
+        key=lambda fl: (int(fl.split("_")[0][1:]), int(fl.split("_")[1]))
+    )
 
     floor_groups = defaultdict(list)
     for floor_slot in floor_slots:
@@ -141,7 +148,7 @@ def generate_csv():
 
 
 @bp.route('/insights', methods=['GET', 'POST'])
-def upload_file():
+def insights():
     def allowed_file(filename):
         ALLOWED_EXTENSIONS = ['csv']
         return '.' in filename and \
@@ -161,7 +168,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('main.upload_file',
+            return redirect(url_for('main.insights',
                                     filename=filename))
 
     day_of_week = [
@@ -173,10 +180,15 @@ def upload_file():
         "Saturday",
         "Sunday",
     ]
-    results_weekday = pd.read_csv(os.path.join(current_app.config['UPLOAD_FOLDER'], "results_weekday.csv"), names=["weekday", "value"])
+    results_weekday = pd.read_csv(
+        os.path.join(current_app.config['UPLOAD_FOLDER'], "results_weekday.csv"),
+        names=["weekday", "value"]
+    )
 
     list_of_hours = ["{}:00".format(h) for h in range(9, 22)]
-    results_hourly = pd.read_csv(os.path.join(current_app.config['UPLOAD_FOLDER'], "results_hour.csv"))
+    results_hourly = pd.read_csv(
+        os.path.join(current_app.config['UPLOAD_FOLDER'], "results_hour.csv")
+    )
 
     # init a basic bar chart:
     # http://bokeh.pydata.org/en/latest/docs/user_guide/plotting.html#bars
