@@ -49,6 +49,7 @@ table>caption {
 tr:hover {background-color: #A0D4DB;}
 
 .embed-wrapper {
+    margin: 2%;
     display: flex;
     justify-content: space-evenly;
 }
