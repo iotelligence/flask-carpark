@@ -96,3 +96,13 @@ li a:hover {
 .center {
     text-align: center;
 }
+
+span.avail {
+    background-color: #B6E806;
+}
+
+span.occ{
+    background-color: #FA7268; 
+}
+
+caption>a:hover { background-color: #A0D4DB; }

@@ -15,33 +15,13 @@
     <div id="log"></div>
 
     <h2 class="header" id="avail"></h2>
-    <div class="center">
-        <a class="button" href="#" onclick="hide()">[Hide/Show] All Floors</a>
-    </div>
-    <div id="all_floor" class="all">
-        <table>
-            <caption><a href="{{ url_for('main.generate_csv') }}" title="Export data to CSV">All Floors</a></caption>
-            <tr>
-                <th>Floor</th>
-                <th>Available</th>
-                <th>Last Update</th>
-            </tr>
-        {% for slot, (avail, timestamp) in devices.items() %}
-        <tr id="tr_{{ slot }}">
-            <td>{{ slot }}</td>
-            <td bgcolor="{% if avail == 'available' %}#B6E806{% else %}#FA7268{% endif %}">{{ avail }}</td>
-            <td>{{ timestamp }}</td>
-        </tr>
-        {% endfor %}
-        </table>
-    </div>
 
     <hr width="85%"/>
 
     <div class="embed-wrapper">
     {% for k, v in floor_groups.items() %}
         <table>
-            <caption><a href="{{ url_for('main.generate_csv', floor=k) }}" title="Export data to CSV">Floor: {{ k }}</a></caption>
+            <caption><a href="{{ url_for('main.generate_csv', floor=k) }}" title="Export data to CSV">Floor: {{ k }}</a> [ available: <span class="avail" id="{{ k }}_avail"></span> | occupied: <span class="occ" id="{{ k }}_occ"></span> ]</caption>
             <tr>
                 <th>Floor</th>
                 <th>Available</th>
