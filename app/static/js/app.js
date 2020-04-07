@@ -25,13 +25,13 @@ $(document).ready(function(){
 
         f3_avail = $("tr[id*='trs_F3_'] td:contains(available)").length;
         f3_occ = $("tr[id*='trs_F3_'] td:contains(occupied)").length;
-        $('#F3_avail').html(f1_avail);
-        $('#F3_occ').html(f1_occ);
+        $('#F3_avail').html(f3_avail);
+        $('#F3_occ').html(f3_occ);
 
         f4_avail = $("tr[id*='trs_F4_'] td:contains(available)").length;
         f4_occ = $("tr[id*='trs_F4_'] td:contains(occupied)").length;
-        $('#F4_avail').html(f1_avail);
-        $('#F4_occ').html(f1_occ);
+        $('#F4_avail').html(f4_avail);
+        $('#F4_occ').html(f4_occ);
     });
 
     socket.on('my response', function(msg) {
@@ -63,13 +63,13 @@ $(document).ready(function(){
 
         f3_avail = $("tr[id*='trs_F3_'] td:contains(available)").length;
         f3_occ = $("tr[id*='trs_F3_'] td:contains(occupied)").length;
-        $('#F3_avail').html(f1_avail);
-        $('#F3_occ').html(f1_occ);
+        $('#F3_avail').html(f3_avail);
+        $('#F3_occ').html(f3_occ);
 
         f4_avail = $("tr[id*='trs_F4_'] td:contains(available)").length;
         f4_occ = $("tr[id*='trs_F4_'] td:contains(occupied)").length;
-        $('#F4_avail').html(f1_avail);
-        $('#F4_occ').html(f1_occ);
+        $('#F4_avail').html(f4_avail);
+        $('#F4_occ').html(f4_occ);
     });
 
     // event handler for new connections
