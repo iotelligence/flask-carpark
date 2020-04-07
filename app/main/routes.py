@@ -1,5 +1,7 @@
 from collections import defaultdict
 from datetime import datetime
+from datetime import date
+from random import randint
 import json
 import os
 from threading import Thread
@@ -9,6 +11,8 @@ from bokeh.embed import components
 from bokeh.layouts import row
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
+from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn, Legend
+from bokeh.palettes import Pastel1
 
 from flask import (
     redirect,
@@ -53,6 +57,18 @@ def _extract(mqtt_msg):
     data = json.loads(json_str)
 
     return board_no, data["data"]
+
+def _floor_counting(df):
+    filter_col = []
+    for i in range(1, 5):
+        filter_col.append([col for col in df if col.startswith("F{}".format(i))])
+        df["F{}".format(i)] = df[filter_col[i-1]].sum(axis=1)
+
+    new_df = df[['F1', 'F2', 'F3', 'F4']].copy()
+    new_df['date'] = df['date'].copy()
+    new_df.index = new_df['date']
+
+    return new_df[["F1", "F2", "F3", "F4"]], ["F1", "F2", "F3", "F4"]
 
 
 def carpark_thread(app):
@@ -190,6 +206,13 @@ def insights():
         os.path.join(current_app.config['UPLOAD_FOLDER'], "results_hour.csv")
     )
 
+    list_of_slots = ["F1_1"]
+    results_date = pd.read_csv(
+        os.path.join(current_app.config['UPLOAD_FOLDER'], "result_carcount.csv")
+    )
+    results_date['date'] = pd.to_datetime(results_date['date'])
+    new_results_date, new_results_date_cols = _floor_counting(results_date)
+
     # init a basic bar chart:
     # http://bokeh.pydata.org/en/latest/docs/user_guide/plotting.html#bars
     fig = figure(
@@ -216,6 +239,7 @@ def insights():
         plot_height=300,
         toolbar_location=None,
     )
+
     fig2.vbar(
         x=list_of_hours,
         bottom=0,
@@ -224,7 +248,38 @@ def insights():
         color="navy",
     )
 
+    fig3 = figure(
+        title="Number of parking cars per slot",
+        plot_width=1024,
+        plot_height=300,
+        x_axis_type="datetime"
+    )
+
+    for data, name, color in zip([new_results_date['F1'],new_results_date['F2'],new_results_date['F3'], new_results_date['F4']], ["F1", "F2", "F3", "F4"], Pastel1[4]):
+        fig3.line(new_results_date.index, data, line_width=3, color=color, alpha=0.8, legend_label=name)
+    #fig4.multi_line(
+    #    xs=[new_results_date.index]*4,
+    #    ys=[new_results_date[name].values for name in ['F1','F2','F3','F4']],
+    #    line_color=Pastel1[4],
+    #    line_width=3
+    #)
+    fig3.legend.location = "top_left"
+    fig3.legend.click_policy = "hide"
+
+    source = ColumnDataSource(results_date)
+    columns = [
+        TableColumn(field="date", title="Date", formatter=DateFormatter())
+    ]
+    for i in range(1,5):
+        for j in range(1,11):
+            columns.append(TableColumn(field="F{}_{}".format(i,j), title="F{}_{}".format(i,j)))
+
+
+    data_table = DataTable(source=source, columns=columns, width=1024, height=400, fit_columns=False)
+
     plots = [fig, fig2]
+    plots2 = [fig3]
+    plots3 = [data_table]
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -233,10 +288,16 @@ def insights():
     # render template
     # script, div = components(fig)
     script, div = components(plots)
+    script2, div2 = components(plots2)
+    script3, div3 = components(plots3)
     html = render_template(
         "main/insights.html",
         plot_script=script,
         plot_div=div,
+        plot_script2=script2,
+        plot_div2=div2,
+        plot_script3=script3,
+        plot_div3=div3,
         js_resources=js_resources,
         css_resources=css_resources,
     )

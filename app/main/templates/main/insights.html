@@ -3,23 +3,38 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Embed Demo</title>
+    <title>Carpark | Insights</title>
     {{ js_resources|indent(4)|safe }}
     {{ css_resources|indent(4)|safe }}
     {{ plot_script|indent(4)|safe }}
+    {{ plot_script2|indent(4)|safe }}
+    {{ plot_script3|indent(4)|safe }}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
       {% include 'includes/navbar.html' %}
-  <div>
-       <form method=post enctype=multipart/form-data>                              
-       <input type=file name=file>                                               
-       <input type=submit value=Upload>                                          
-       </form>
+
+  <div class="center">
+      <h1>Carpark Insights</h1>
   </div>
 
   <div class="embed-wrapper">
+      <h2>Average occupancy rate over year.</h2>
       {% for div in plot_div %}
+        {{ div|indent(4)|safe }}
+      {% endfor %}
+  </div>
+
+  <div class="embed-wrapper">
+      <h2>Total car per floor in January</h2>
+      {% for div in plot_div2 %}
+        {{ div|indent(4)|safe }}
+      {% endfor %}
+  </div>
+
+  <div class="embed-wrapper">
+      <h2>Total car per slot table in January</h2>
+      {% for div in plot_div3 %}
         {{ div|indent(4)|safe }}
       {% endfor %}
   </div>

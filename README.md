@@ -194,9 +194,8 @@ Actual result: -
 	(2) To display data on dashboard page
 
 ## Test data
-	To send request to server ([get])
+	To send request to server
 
 ## Expected results
-	To receive .csv file from server
 	To display occupancy map that available and occupied
 
