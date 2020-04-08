@@ -209,11 +209,10 @@ F2_10	     |   Available         |  1/13/2020 10:58:00
 
 
 ### Group Member
-```
-Mr. Ming Hsien Chuang         6214552743
-Mr. Nyan Lin Htet             6222040351
-Mr. Phondanai Khanti          6214552646 
-Mrs. Sawittree Jumpathong     6222040286
 
-```
+**Mr. Ming Hsien Chuang         6214552743**
+**Mr. Nyan Lin Htet             6222040351**
+**Mr. Phondanai Khanti          6214552646** 
+**Mrs. Sawittree Jumpathong     6222040286**
+
 
