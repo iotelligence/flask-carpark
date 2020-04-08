@@ -207,3 +207,5 @@ F2_10	     |   Available         |  1/13/2020 10:58:00
 **Expected results**
 * To display occupancy map that available and occupied
 
+### Group Member
+
